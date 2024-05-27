@@ -1,0 +1,103 @@
+Source: https://en.wikipedia.org/wiki/The_Snail_and_the_Whale
+* Page 1 *
+On a smooth black rock by the docks lives a sea snail who dreams of seeing the big, 
+wide world, a desire her rock-bound friends don't understand. 
+
+Options:
+1.Take action -> Page 2
+2.Keep dreaming -> Page 5
+
+Hint: Taking action is the first step towards achieving your goals! 
+
+
+* Page 2 *
+She writes a "Lift wanted around the world" message using her snail trail.
+...
+One moonlit night, a kind humpback whale arrives and offers to take her along on his travels. 
+
+Options:
+1.Accept offer -> Page 3
+2.Rejects offer -> Page 5
+
+Hint: Travelling will always enrich your life!
+
+* Page 3 *
+Together, they embark on a journey across the oceans, past icebergs, volcanoes, sharks, and penguins. 
+...
+One sunny summer morning, the whale, confused by the sound of racing speedboats, 
+swims into a bay and gets stranded by the retreating tide.
+
+Options:
+1.Help -> Page 4
+2.Do not help ->  End
+
+Hint: Helping friends improve the lives of those around you!
+
+* Page 4 *
+The snail writes "Save The Whale!" with her trail on a school blackboard to help her friend. 
+The teacher calls for help, and local people keep the whale wet until the tide returns. 
+The snail and the whale then swim away safely, cheered on by the villagers.
+
+Options:
+1.Come back home -> Page 6
+2.Keep adventuring -> Page 5
+
+Hint: Navigating adventures is so much fun! 
+
+* Page 5 *
+One day, a fearsome sea dragon arrives at the docks threatening to harm everyone.
+
+Options:
+1.Fight dragon -> Page 5.1
+2.Run away -> End
+
+Hint: You're stronger than you think!
+
+* Page 5.1 *
+The brave snail devises a clever plan with the way, tricking the dragon into believing they
+have a treasure in a nearby underwater cave.
+..............
+As they venture deeper into caves, the snail using her small size, 
+guides the dragon through narrow passages that trap the dragon,
+allowing them to escape and save the docks!
+ 
+Options:
+1.Come back home -> Page 6
+2.Talk to the snail major -> Page 7
+
+Hint: Sharing your adventures is valuable!
+
+* Page 6 *
+They return to the snail's home at the dock, where the other snails are amazed by their stories. 
+
+Options:
+1.Go to sleep -> Page 8
+2.Talk to the snail major -> Page 7
+
+Hint: Sharing your adventures is valuable!
+
+* Page 7 *
+After their adventure, the mayor of the docks
+congratulates the snail. In recognition of her heroic
+actions, he presents her with the prestigious
+Docks Medal, symbolizing her invaluable bravery. 
+
+Options:
+1.Go to sleep -> Page 8
+2.End story -> End
+
+Hint: It's time to get a well-deserved rest!
+
+* Page 8 *
+After a long day, snuggling back under the cover
+of its bed, the snail realizes that "Anyone, no
+matter how small you are, can achieve great
+things if they put their mind to it!" 
+...
+Keep trying things beyond your reach till you succeed, be a snail!
+
+No Options, End
+
+
+
+

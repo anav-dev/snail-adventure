@@ -37,7 +37,7 @@ The story adventure will be tracked to check how far an user has gone in the sto
   <summary>Click here to visualize user interactions flow chart</summary>
   <br>
     
-  ![Story Flow](https://github.com/anav-dev/snail-adventure/blob/main/assets/docs/features/user-interactions.jpeg)
+  ![User Interactions](https://github.com/anav-dev/snail-adventure/blob/main/docs/features/user-interactions.jpeg)
 
   </details>
 
@@ -65,7 +65,7 @@ The story adventure will be tracked to check how far an user has gone in the sto
   <summary>Click here to see story's flow chart</summary>
   <br>
     
-  ![Story Flow](https://github.com/anav-dev/snail-adventure/blob/main/assets/docs/features/adventure-mapout.jpeg)
+  ![Story Flow](https://github.com/anav-dev/snail-adventure/blob/main/docs/features/adventure-mapout.jpeg)
 
   </details>
 
@@ -85,7 +85,7 @@ The story adventure will be tracked to check how far an user has gone in the sto
 
   In the Hint section, a redish colour `#9a031e` and a greenish colour `#2c6e49` were used to highlight advisable and not recommended choices respectively as well as to enhance the user experience by improving visual clarity.
 
-  ![Colour Scheme](https://github.com/anav-dev/snail-adventure/blob/main/assets/docs/features/color-scheme.jpg)
+  ![Colour Scheme](https://github.com/anav-dev/snail-adventure/blob/main/docs/features/color-scheme.jpg)
 
 
 ## Features

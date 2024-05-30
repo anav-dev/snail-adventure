@@ -1,6 +1,6 @@
 Source: https://en.wikipedia.org/wiki/The_Snail_and_the_Whale
 * Page 1 *
-On a smooth black rock by the docks lives a sea snail who dreams of seeing the big, 
+On a rock by the docks lives a sea snail who dreams of seeing the big, 
 wide world, a desire her rock-bound friends don't understand. 
 
 Options:
@@ -39,7 +39,7 @@ The teacher calls for help, and local people keep the whale wet until the tide r
 The snail and the whale then swim away safely, cheered on by the villagers.
 
 Options:
-1.Come back home -> Page 6
+1.Come back home -> Page 7
 2.Keep adventuring -> Page 5
 
 Hint: Navigating adventures is so much fun! 
@@ -48,12 +48,12 @@ Hint: Navigating adventures is so much fun!
 One day, a fearsome sea dragon arrives at the docks threatening to harm everyone.
 
 Options:
-1.Fight dragon -> Page 5.1
+1.Fight dragon -> Page 6
 2.Run away -> End
 
 Hint: You're stronger than you think!
 
-* Page 5.1 *
+* Page 6 *
 The brave snail devises a clever plan with the way, tricking the dragon into believing they
 have a treasure in a nearby underwater cave.
 ..............
@@ -62,33 +62,33 @@ guides the dragon through narrow passages that trap the dragon,
 allowing them to escape and save the docks!
  
 Options:
-1.Come back home -> Page 6
-2.Talk to the snail major -> Page 7
-
-Hint: Sharing your adventures is valuable!
-
-* Page 6 *
-They return to the snail's home at the dock, where the other snails are amazed by their stories. 
-
-Options:
-1.Go to sleep -> Page 8
-2.Talk to the snail major -> Page 7
+1.Come back home -> Page 7
+2.Talk to the snail major -> Page 8
 
 Hint: Sharing your adventures is valuable!
 
 * Page 7 *
+They return to the snail's home at the dock, where the other snails are amazed by their stories. 
+
+Options:
+1.Go to sleep -> Page 9
+2.Talk to the snail major -> Page 8
+
+Hint: Sharing your adventures is valuable!
+
+* Page 8 *
 After their adventure, the mayor of the docks
 congratulates the snail. In recognition of her heroic
 actions, he presents her with the prestigious
 Docks Medal, symbolizing her invaluable bravery. 
 
 Options:
-1.Go to sleep -> Page 8
+1.Go to sleep -> Page 9
 2.End story -> End
 
 Hint: It's time to get a well-deserved rest!
 
-* Page 8 *
+* Page 9 *
 After a long day, snuggling back under the cover
 of its bed, the snail realizes that "Anyone, no
 matter how small you are, can achieve great
@@ -97,6 +97,30 @@ things if they put their mind to it!"
 Keep trying things beyond your reach till you succeed, be a snail!
 
 No Options, End
+
+
+
+// story dict structure
+story = {
+    # story start
+    [page number]: {
+        'Text' : [
+            "[line of text]",
+            "[line of text]",
+            "[line of text]",
+        ],
+        'Options': [
+            ("[option]", [option page number]),
+            ("[option]", [option page number]),
+        ],
+        'Hint': [
+            ("[hint]"),
+        ]
+    },
+
+
+    # story end
+}
 
 
 

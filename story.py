@@ -1,141 +1,153 @@
-# Modules
-import emoji
-from colorama import Fore, Style
-from justifytext import justify
-
-# Colours for text | Source: https://pypi.org/project/colorama/
-GRAY = Fore.LIGHTBLACK_EX
-BROWN = "\033[38;2;139;69;19m" #print(COLOUR + "text" + Style.RESET_ALL)
-GREEN = Fore.GREEN
-RED = Fore.RED
-BLUE = Fore.BLUE
-
-# Global variables declaration
-emoji_snail = emoji.emojize(":snail:")
-emoji_whale = emoji.emojize(":whale:")
-brown_dots = BROWN + "..." + Style.RESET_ALL
-blue_dots = BLUE + "..." + Style.RESET_ALL
-username_validated = ""
-
-
-# Functions
-# 1. Welcome message
-def welcome_msg():
-    """
-    Prints welcome message.
-    """
-    print("Welcome to the Snail Adventure\n") 
-    print("Are you ready to embark on an adventure?\n") 
-    print(f"{brown_dots}{emoji_snail}\n") 
-
-# 2. Get and validate ser's name
-# get user's name
-def get_username():
-    """
-    Gets name input from user.
-
-    Returns username.
-    """
-    # input() function takes all the input as a string only
-    username = input("What's your name?\n")
-
-    if validate_username(username):
-        global username_validated
-        username_validated = username.capitalize()
-        print(f"{username_validated} is a valid username!\n") 
-   
-    return username_validated
-
-
-# validate user's name
-def validate_username(username):
-    """
-    Check username entered is a string and is not empty or just whitespace.
-    Raises ValueError if data entered is not valid, and returns False.
-
-    Returns True if data is valid.
-    """
-    print(f"Validating username: {username} ...\n")
-    special_characters = "!@#$%^&*()-+?_=,<>/"
+# story dictionary (with pages number, page text, and user options) to store story data in key-value pairs
+snail_story = {
+    # story start
+    1: {
+        'Text' : [
+            "On a rock by the docks lives a sea snail",
+            "who dreams of seeing the big, wide world, ",
+            "a desire her rock-bound friends don't understand.",
+        ],
+        'Options': [
+            ("Take action", 2),
+            ("Keep dreaming", 5),
+        ],
+        'Hint': [
+            "Taking action is the first step towards achieving your goals!",
+        ]
+    },
+    # option selected: take action
+    2: {
+        'Text' : [
+            "The Snail writes a `Lift wanted around the world` message using her snail trail.",
+            "...",
+            "One moonlit night, a kind humpback whale arrives and offers to take her along on his travels.",
+        ],
+        'Options': [
+            ("Accept offer", 3),
+            ("Reject offer", 5),
+        ],
+        'Hint': [
+            "Travelling will always enrich your life!",
+        ]
+    },
+    # option selected: accept offer
+    3: {
+        'Text' : [
+            "Together, they embark on a journey across the oceans, past icebergs, volcanoes, sharks, and penguins.",
+            "One sunny summer morning, the whale, confused by the sound of racing speedboats, ",
+            "swims into a bay and gets stranded by the retreating tide.",
+        ],
+        'Options': [
+            ("Help", 4),
+            ("Do not help", 10), # This options leads to end story
+        ],
+        'Hint': [
+            "Helping friends improve the lives of those around you!",
+        ]
+    },
+    # option selected: help
+    4: {
+        'Text' : [
+            "The snail writes `Save The Whale!` with her trail on a school blackboard to help her friend.",
+            "The teacher calls for help, and villagers keep the whale wet until the tide returns.",
+            "The snail and the whale then swim away safely.",
+        ],
+        'Options': [
+            ("Come back home", 7),
+            ("Keep adventuring", 5),
+        ],
+        'Hint': [
+            "Navigating adventures is so much fun!",
+        ]
+    },
+    # option selected: keep adventuring
+    5: {
+        'Text' : [
+            "One day, a fearsome sea dragon arrives at the docks threatening to harm everyone.",
+        ],
+        'Options': [
+            ("Fight the dragon", 6),
+            ("Run away", 10), # This options leads to end story
+        ],
+        'Hint': [
+            "The snail is stronger than you think!",
+        ]
+    },
+    # option selected: fight the dragon
+    6: {
+        'Text' : [
+            "The snail trickes the dragon into believing they have a treasure in a nearby underwater cave",
+            "As they venture deeper into caves, the snail using her small size, ",
+            "guides the dragon through narrow passages that trap the dragon, ",
+            "allowing them to escape and save the docks!",
+        ],
+        'Options': [
+            ("Come back home", 7),
+            ("Meet the snail major", 8),
+        ],
+        'Hint': [
+            "The major is renowned for its friendliness!",
+        ]
+    },
+    # option selected: come back home
+    7: {
+        'Text' : [
+            "They return to the snail's home at the dock, ",
+            "where the other snails are amazed by their stories.",
+        ],
+        'Options': [
+            ("Go to sleep", 9),
+            ("Meet the snail major", 8),
+        ],
+        'Hint': [
+            "The major is renowned for its friendliness!",
+        ]
+    },
+    # option selected: meet the snail major
+    8: {
+        'Text' : [
+            "After their adventure, the mayor of the docks congratulates the snail.",
+            "In recognition of her heroic actions, he presents her with ",
+            "the prestigious Docks Medal, symbolizing her invaluable bravery.",
+        ],
+        'Options': [
+            ("Go to sleep", 9),
+            ("End story ", 10),
+        ],
+        'Hint': [
+            "It's time to get a well-deserved rest!",
+        ]
+    },
+    # option selected: go to sleep
+    9: {
+        'Text' : [
+            "After a long adventure, the snail realizes that ...",
+            " anyone, no matter how small you are, "
+            "can achieve great things if they put their mind to it! ",
+            "so ... ",
+            "keep trying things beyond your reach till you succeed, be a snail!",
+        ],
+        'Options': [
+           ("End story ", 10),
+        ],
+        'Hint': [
+            # No hint needed here
+        ]
+    },
+    # options selected: do not help, run away, or end story
+    10: {
+        'Text' : [
+            "And so, this adventure came to an end!",
+        ],
+        'Options': [
+           ("Read again ", 1), # Redirect to first story
+           ("Exit program") # Redirect to welcome section
+        ],
+        'Hint': [
+            # No hint needed here
+        ]
+    },
     
-    try:
-        # check if if all characters in username string are alphabetic 
-        if username.isalpha():
-            print(f"{blue_dots}{emoji_whale}\n")
 
-        # check if username contains numbers or is empty
-        elif username.isdigit() or username.strip() == "":
-            raise ValueError("Username must contain only letters and be non-empty.\n")
-        
-        # check if username contains special characters
-        elif any(c in special_characters for c in username):
-            raise ValueError("Username must contain only letters, not special characters.\n")
-
-    except ValueError as e:
-        print(f"Invalid name: {e}\n")
-        get_username()
-        return False        
-    
-    return True
-    
-
-# 3. Display story instructions
-def display_instructions():
-    """
-    Prints story instructions.
-    """
-    instructions = "Snail Adventure is a text-based game where you will engage in a story-driven experience.\nYou will encounter different scenes, challenges, and offer choices.\nBy selecting a choice, such as “help”, “take action,” or “accept offer”,\nyou will move to the next corresponding chapter, advancing the story based on your decisions.\n"
-    instructions_justified = (justify(instructions, 85))
-    
-    for i in instructions_justified:
-        print("\n" + BROWN + i + Style.RESET_ALL + "\n")
-
-# 4. Yes or No Question 
-def query_instructions(username_validated):
-    """
-    Receives the validated username.
-    Prompts user to see story instructions.
-    """
-    answer_yes = ("yes", "y", "ye", "yep", "ok", "okay")
-    answer_no = ("no", "n", "not", "nop", "nope")
-
-    try:
-        print(f"{username_validated}, would you like to see the instructions? (yes/no)\n")
-        query_instructions_answer = input().strip().lower()
-        
-        # if yes answered
-        if query_instructions_answer in answer_yes:
-            #print("yes answered")
-            display_instructions()
-        # if no answered
-        elif query_instructions_answer in answer_no:
-            print("no answered --> call function to start story")
-        # else
-        else:
-            print("Please enter a right answer (yes/no) \n")
-    except ValueError as e:
-        print("Error")
-  
-
-
-
-
-
-
-# read story (start adventure)
-# check user's choice
-# display hint
-# redirect user to choosen story part
-# end game -- show tracker info here
-# read again
-# track user's page
-# main function (call all functions)
-def main():
-    welcome_msg()
-    get_username()
-    query_instructions(username_validated)
-
-main()
-
-# DICTIONARY
-# dictionary for story (with text, pages number, and user options) to store and manage story data in key-value pairs
+    # story end
+}

@@ -79,7 +79,7 @@ def get_username():
     if validate_username(username):
         global username_validated
         username_validated = username.capitalize()
-        print(f"{username_validated} is a valid username!\n") 
+        print(GREEN + f"{username_validated} is a valid username!\n" + Style.RESET_ALL) 
         typing_print("\nPlease wait, clearing screen ...\n", GRAY)
         # BUFHERE AFTER THIS LINE EVERYTHING IS GRAY COLOUR -> FIX
         time.sleep(3)
@@ -105,7 +105,8 @@ def validate_username(username):
     try:
         # check if if all characters in username string are alphabetic 
         if username.isalpha():
-            print(f"\n{blue_dots}{emoji_whale}\n")
+            #print(f"{blue_dots}{emoji_whale}\n")
+            print()
 
         # check if username contains numbers or is empty
         elif username.isdigit() or username.strip() == "":
@@ -116,7 +117,7 @@ def validate_username(username):
             raise ValueError("Username must contain only letters, not special characters.\n")
 
     except ValueError as e:
-        print(f"Invalid name: {e}\n")
+        print(RED + f"Invalid name: {e}\n" + Style.RESET_ALL)
         get_username()
         return False        
     
@@ -163,7 +164,7 @@ def query_instructions(username_validated):
         # if no answered
         elif query_instructions_answer in answer_no:
             #print("no answered --> call function to start story")
-            typing_print("Loading story, please wait...\n", GRAY)
+            typing_print(f"Loading story, {username_validated} please wait...\n", GRAY)
             time.sleep(3)
             clear_screen()
             lines_test = ["Hello world", "This is a test.", "Some text."]

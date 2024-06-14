@@ -105,6 +105,44 @@ The story adventure will be tracked to check how far an user has gone in the sto
 
 ### Bugs
 
+- __Python: Command not recognized__
+
+    When using the command `os.system("clear")` to clear the screen, the following error appears as the command was not recognized. 
+    
+    <details>
+    <summary>Click here to see error and faulty code</summary>
+    <br>
+    
+    ![Command Error](https://github.com/anav-dev/snail-adventure/blob/main/docs/features/test/command-error.jpg)
+    ![Faulty Code](https://github.com/anav-dev/snail-adventure/blob/main/docs/features/test/command-error-code.jpg)
+
+    </details>
+    
+    The error arose because the `clear` command is specific to Unix-based systems like Linux and macOS, and it's not recognized by the Windows command prompt. Error solved by using correct command for Windows systems, as follows: `os.system("cls")`.
+
+- __Python: Colorama Behavior__
+
+    After validating the username, any following printed lines will adopt the colour of the preceding line, rendering them in gray.
+
+    <details>
+    <summary>Click here to see issue</summary>
+    <br>
+    
+    ![Colorama Issue](https://github.com/anav-dev/snail-adventure/blob/main/docs/features/test/colorama-issue.jpg)
+
+    </details>
+
+    Setting the error message colour to white and resetting all styles after printing that line resolved the unexpected behavior.
+
+    <details>
+    <summary>Click here to see updated code</summary>
+    <br>
+    
+    ![Code Fixed](https://github.com/anav-dev/snail-adventure/blob/main/docs/features/test/colorama-issue-doce.jpg)
+
+    </details>
+
+
 ## Deployment
 
 This project was deployed from the main branch using [Heroku platform](https://www.heroku.com/).
@@ -119,7 +157,6 @@ This project was deployed from the main branch using [Heroku platform](https://w
 ## Credits
 
 **References**
-
 - Wikipedia: [The Snail and the Whale Story](https://en.wikipedia.org/wiki/The_Snail_and_the_Whale)
 - Kyle Lierer Github: [Text Adventure Tutorial](https://github.com/Kyle-L/Text-Adventure-Tutorial?tab=readme-ov-file#how-will-the-user-interact-with-the-game)
 - Flow Chart Application: [Lucidchart.com/](https://www.lucidchart.com/)
@@ -130,6 +167,7 @@ This project was deployed from the main branch using [Heroku platform](https://w
 - MDN Documentation: [MDN Docs](https://developer.mozilla.org/en-US/) 
 - W3Schools: [W3Schools.com](https://www.w3schools.com/) 
 - StackOverflow: [Stackoverflow.com](https://stackoverflow.com/)
+- CI Python Linter: [CI Python Linter](https://pep8ci.herokuapp.com/)
 
   
 **Support & Advice**

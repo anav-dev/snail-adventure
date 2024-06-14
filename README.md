@@ -75,7 +75,7 @@ The story adventure will be tracked to check how far an user has gone in the sto
   <summary>Click here to see logic's flow chart</summary>
   <br>
     
-  ![Logic Flow](https://github.com/anav-dev/snail-adventure/blob/main/assets/docs/features/)
+  ![Logic Flow](https://github.com/anav-dev/snail-adventure/blob/main/docs/features/logic-flow.png)
 
   </details>
 

@@ -25,6 +25,9 @@ emoji_whale = emoji.emojize(":whale:")
 brown_dots = BROWN + "..." + Style.RESET_ALL
 blue_dots = BLUE + "..." + Style.RESET_ALL
 username_validated = ""
+query_instr = "would you like to see the instructions?"
+query_adv = "would you like to start the adventure?"
+query_reset = "would you prefer to restart this adventure?"
 
 
 # Functions for typing text effect; code adapted from: https://www.101computing.net/python-typing-text-effect/
@@ -80,10 +83,9 @@ def get_username():
         global username_validated
         username_validated = username.capitalize()
         print(GREEN + f"{username_validated} is a valid username!\n" + Style.RESET_ALL) 
-        typing_print("\nPlease wait, clearing screen ...\n", GRAY)
-        # BUFHERE AFTER THIS LINE EVERYTHING IS GRAY COLOUR -> FIX
-        time.sleep(3)
-        clear_screen()
+        #typing_print("\nPlease wait, clearing screen ...\n", GRAY)
+        #time.sleep(3)
+        #clear_screen()
    
     return username_validated
 
@@ -141,7 +143,7 @@ def display_instructions():
     # add question here (ready to start your adventure?)
 
 # 4. Function for yes/no question 
-def query_instructions(username_validated):
+def query_instructions(username_validated, query):
     """
     Receives the validated username.
     Prompts user to see story instructions.
@@ -154,7 +156,8 @@ def query_instructions(username_validated):
 
     try:
         #print(f"{username_validated}, would you like to see the instructions? (yes/no)\n")
-        typing_print(f"{username_validated}, would you like to see the instructions? (yes/no)\n", WHITE) 
+        #typing_print(f"{username_validated}, would you like to see the instructions? (yes/no)\n", WHITE) 
+        typing_print(f"{username_validated}, {query} (yes/no)\n", WHITE)
         query_instructions_answer = input().strip().lower()
         
         # if yes answered
@@ -208,9 +211,7 @@ def display_page_text(lines):
 def main():
     welcome_msg()
     get_username()
-    query_instructions(username_validated)
-    #lines_test = ["Hello world", "This is a test.", "Some text."]
-    #display_page_text(lines_test)
+    query_instructions(username_validated, query_instr)
 
 main()
 

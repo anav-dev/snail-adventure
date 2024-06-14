@@ -81,11 +81,13 @@ The story adventure will be tracked to check how far an user has gone in the sto
 
 
 
-- __Colour Palettes__
+- __Colour Palettes__ 
 
-  In the Hint section, a redish colour `#9a031e` and a greenish colour `#2c6e49` were used to highlight advisable and not recommended choices respectively as well as to enhance the user experience by improving visual clarity.
+  The below HEX codes provide a close representation of the colors used in the Python module Colorama.
 
   ![Colour Scheme](https://github.com/anav-dev/snail-adventure/blob/main/docs/features/color-scheme.jpg)
+
+  Red and green colors are used to highlight recommended and not recommended choices, respectively, as well as to guide users when entering data. This enhances user experience by providing clear visual cues.
 
 
 ## Features
@@ -105,7 +107,7 @@ The story adventure will be tracked to check how far an user has gone in the sto
 
 ### Bugs
 
-- __Python: Command not recognized__
+- __Python: Not Recognized Command__
 
     When using the command `os.system("clear")` to clear the screen, the following error appears as the command was not recognized. 
     
@@ -113,8 +115,8 @@ The story adventure will be tracked to check how far an user has gone in the sto
     <summary>Click here to see error and faulty code</summary>
     <br>
     
-    ![Command Error](https://github.com/anav-dev/snail-adventure/blob/main/docs/features/test/command-error.jpg)
-    ![Faulty Code](https://github.com/anav-dev/snail-adventure/blob/main/docs/features/test/command-error-code.jpg)
+    ![Command Error](https://github.com/anav-dev/snail-adventure/blob/main/docs/test/command-error.jpg)
+    ![Faulty Code](https://github.com/anav-dev/snail-adventure/blob/main/docs/test/command-error-code.jpg)
 
     </details>
     
@@ -128,7 +130,7 @@ The story adventure will be tracked to check how far an user has gone in the sto
     <summary>Click here to see issue</summary>
     <br>
     
-    ![Colorama Issue](https://github.com/anav-dev/snail-adventure/blob/main/docs/features/test/colorama-issue.jpg)
+    ![Colorama Issue](https://github.com/anav-dev/snail-adventure/blob/main/docs/test/colorama-issue.jpg)
 
     </details>
 
@@ -138,7 +140,7 @@ The story adventure will be tracked to check how far an user has gone in the sto
     <summary>Click here to see updated code</summary>
     <br>
     
-    ![Code Fixed](https://github.com/anav-dev/snail-adventure/blob/main/docs/features/test/colorama-issue-doce.jpg)
+    ![Code Fixed](https://github.com/anav-dev/snail-adventure/blob/main/docs/test/colorama-issue-code.jpg)
 
     </details>
 

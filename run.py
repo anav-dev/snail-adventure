@@ -2,14 +2,22 @@
 import emoji
 from colorama import Fore, Style
 from justifytext import justify
-from story.py import *
+import time # Importing time module to use sleep function
+import os # Importing os module to use system function
+import sys # Importing sys module to use stdout attribute
 
-# Colours for text | Source: https://pypi.org/project/colorama/
-GRAY = Fore.LIGHTBLACK_EX
-BROWN = "\033[38;2;139;69;19m" #print(COLOUR + "text" + Style.RESET_ALL)
-GREEN = Fore.GREEN
-RED = Fore.RED
+
+# Colours for text | Source: https://pypi.org/project/colorama/  
+BLACK = Fore.BLACK
 BLUE = Fore.BLUE
+BROWN = "\033[38;2;139;69;19m"
+CYAN = Fore.CYAN
+GRAY = Fore.LIGHTBLACK_EX
+GREEN = Fore.GREEN
+MAGENTA = Fore.MAGENTA
+RED = Fore.RED
+WHITE = Fore.WHITE
+
 
 # Global variables declaration
 emoji_snail = emoji.emojize(":snail:")
@@ -19,18 +27,45 @@ blue_dots = BLUE + "..." + Style.RESET_ALL
 username_validated = ""
 
 
-# Functions
+# Functions for typing text effect; code adapted from: https://www.101computing.net/python-typing-text-effect/
+# 1. Clear screen
+def clear_screen():
+    """
+    Clears screen.
+    """
+    os.system("cls") #for windows CMD use "cls", for Unix/MAC/Linux use "clear"
+
+# 2. Typing print
+def typing_print(text, color): #second paramenter is color to fix color issue
+    """
+    Creates typing effect.
+    """
+    for character in text:
+        sys.stdout.write(color + character)
+        sys.stdout.flush()
+        time.sleep(0.05)
+
+# 3. Pause and call clear screen
+def pause_and_clear():
+    """
+    Clears screen after a brief pause.
+    """
+    time.sleep(1.5)
+    clear_screen()
+
+
+# Functions for story 
 # 1. Welcome message
 def welcome_msg():
     """
-    Prints welcome message.
+    Prints welcome message and snail emoji.
     """
-    print("Welcome to the Snail Adventure\n") 
-    print("Are you ready to embark on an adventure?\n") 
-    print(f"{brown_dots}{emoji_snail}\n") 
 
-# 2. Get and validate ser's name
-# get user's name
+    typing_print("\nWelcome to Snail Adventure\n", WHITE) 
+    print(f"\n{brown_dots}{emoji_snail}\n") 
+
+# 2. Get and validate user's name
+# 2.1. Get username
 def get_username():
     """
     Gets name input from user.
@@ -45,11 +80,14 @@ def get_username():
         global username_validated
         username_validated = username.capitalize()
         print(f"{username_validated} is a valid username!\n") 
+        typing_print("\nPlease wait, clearing screen ...\n", GRAY)
+        # BUFHERE AFTER THIS LINE EVERYTHING IS GRAY COLOUR -> FIX
+        time.sleep(3)
+        clear_screen()
    
     return username_validated
 
-
-# validate user's name
+# 2.2. Validate username
 def validate_username(username):
     """
     Check username entered is a string and is not empty or just whitespace.
@@ -61,13 +99,13 @@ def validate_username(username):
     Returns:
         True: if data is valid.
     """
-    print(f"Validating username: {username} ...\n")
+    typing_print(f"\nValidating username: {username} ...\n", GRAY)
     special_characters = "!@#$%^&*()-+?_=,<>/"
     
     try:
         # check if if all characters in username string are alphabetic 
         if username.isalpha():
-            print(f"{blue_dots}{emoji_whale}\n")
+            print(f"\n{blue_dots}{emoji_whale}\n")
 
         # check if username contains numbers or is empty
         elif username.isdigit() or username.strip() == "":
@@ -84,19 +122,24 @@ def validate_username(username):
     
     return True
     
-
-# 3. Display story instructions
+# 3. Functions for displaying instructions
 def display_instructions():
     """
     Prints story instructions.
     """
+    typing_print("\nLoading instructions, please wait...\n", GRAY)
+    time.sleep(3)
+    clear_screen()
+
     instructions = "Snail Adventure is a text-based game where you will engage in a story-driven experience.\nYou will encounter different scenes, challenges, and offer choices.\nBy selecting a choice, such as “help”, “take action,” or “accept offer”,\nyou will move to the next corresponding chapter, advancing the story based on your decisions.\n"
     instructions_justified = (justify(instructions, 85))
     
     for i in instructions_justified:
         print("\n" + BROWN + i + Style.RESET_ALL + "\n")
 
-# 4. Yes or No Question 
+    # add question here (ready to start your adventure?)
+
+# 4. Function for yes/no question 
 def query_instructions(username_validated):
     """
     Receives the validated username.
@@ -109,7 +152,8 @@ def query_instructions(username_validated):
     answer_no = ("no", "n", "not", "nop", "nope")
 
     try:
-        print(f"{username_validated}, would you like to see the instructions? (yes/no)\n")
+        #print(f"{username_validated}, would you like to see the instructions? (yes/no)\n")
+        typing_print(f"{username_validated}, would you like to see the instructions? (yes/no)\n", WHITE) 
         query_instructions_answer = input().strip().lower()
         
         # if yes answered
@@ -118,15 +162,31 @@ def query_instructions(username_validated):
             display_instructions()
         # if no answered
         elif query_instructions_answer in answer_no:
-            print("no answered --> call function to start story")
+            #print("no answered --> call function to start story")
+            typing_print("Loading story, please wait...\n", GRAY)
+            time.sleep(3)
+            clear_screen()
+            lines_test = ["Hello world", "This is a test.", "Some text."]
+            display_page_text(lines_test)
         # else
         else:
             print("Please enter a right answer (yes/no) \n")
     except ValueError as e:
         print("Error")
-  
 
-# 5. Display page text
+# 5. Function to display page text
+def display_page_text(lines):
+    """
+    Displays each line of text one by one and pauses for a short time after each line.
+
+    Args:
+        lines (list): A list of strings, where each string is a line of text to display.
+    """
+    for line in lines:     
+        print(line) # Print the line with a newline character at the end
+        time.sleep(0.1) # Pause for 0.1 seconds
+    
+    print() # Print an empty line for better readability
 
 
 # 6. Get user's choice 
@@ -143,12 +203,13 @@ def query_instructions(username_validated):
 # read again
 # track user's page
 
-
 # main function (call all functions)
 def main():
     welcome_msg()
     get_username()
     query_instructions(username_validated)
+    #lines_test = ["Hello world", "This is a test.", "Some text."]
+    #display_page_text(lines_test)
 
 main()
 

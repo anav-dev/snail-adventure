@@ -19,7 +19,6 @@ snail_story = {
     2: {
         'Text' : [
             "The Snail writes a `Lift wanted around the world` message using her snail trail.",
-            "...",
             "One moonlit night, a kind humpback whale arrives and offers to take her along on his travels.",
         ],
         'Options': [

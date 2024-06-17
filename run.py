@@ -31,7 +31,7 @@ username_validated = ""
 query_instr = "would you like to see the instructions?"
 query_adv = "are you ready to start the adventure?"
 query_reset = "do you prefer to restart this adventure?"
-lines = ["Hello world", "This is a test.", "Some text."]
+
 
 # Functions for typing text effect; code adapted from: https://www.101computing.net/python-typing-text-effect/
 # 1. Clear screen
@@ -126,7 +126,7 @@ def validate_username(username):
     return True
     
 # 3. Functions for displaying instructions
-def display_instructions():
+def print_instructions():
     """
     Prints story instructions.
     """
@@ -151,7 +151,7 @@ def display_instructions():
     # add question here (ready to start your adventure?)
 
 # 4. Function for yes/no question 
-def query_question(username_validated, query):
+def ask_question(username_validated, query):
     """
     Receives the validated username and a query.
     Prompts user to answer a question.
@@ -167,30 +167,30 @@ def query_question(username_validated, query):
         #print(f"{username_validated}, would you like to see the instructions? (yes/no)\n")
         #typing_print(f"{username_validated}, would you like to see the instructions? (yes/no)\n", WHITE) 
         typing_print(f"{username_validated}, {query} (yes/no)\n", WHITE)
-        query_question_answer = input().strip().lower()
+        ask_question_answer = input().strip().lower()
         
         # if yes answered
-        if query_question_answer in answer_yes:
+        if ask_question_answer in answer_yes:
             #print("yes answered")
             # check if the second paramenter matches a specific query; then run corresponding function based on second paramenter
             if query == query_instr:
-                display_instructions()
-                query_question(username_validated, query_adv)
+                print_instructions()
+                ask_question(username_validated, query_adv)
             elif query == query_adv:
                 #print("query_adv_yes")
                 typing_print(f"Loading story, {username_validated} please wait...\n", GRAY)
                 pause_and_clear()
                 # ** story starts here **
-                display_page_text(lines)
+                story_flow(snail_story)
             elif query == query_reset:
                 print("query_reset_yes")
             else:
                 print("Query not recognized.")
         # if no answered
-        elif query_question_answer in answer_no:
+        elif ask_question_answer in answer_no:
             # check if the second paramenter matches a specific query; then run corresponding function based on second paramenter
             if query == query_instr:
-                query_question(username_validated, query_adv)
+                ask_question(username_validated, query_adv)
             elif query == query_reset:
                 print("query_reset_no")
             else:
@@ -199,15 +199,42 @@ def query_question(username_validated, query):
         # else
         else:
             print(RED + "Please enter a right answer (yes/no) \n" + Style.RESET_ALL)
-            query_question(username_validated, query)
+            ask_question(username_validated, query)
     except ValueError as e:
         print("Error")
 
 
-# 5. Function to display page text
-def display_page_text(lines):
+# 5. Function to access data from story_file.py file
+def access_story_data(snail_story, page_number):
     """
-    Displays each line of text one by one and pauses for a short time after each line.
+    Accesses 'Text', 'Options', 'Hint' data for a specific page number.
+
+    Args:
+        data (dict): data structure imported from story_file.py
+        page_number (int): page number for which data needs to be accesed.
+
+    Returns:
+        tuple: containing the data for the given page number. 
+                (if page number is not found, returns None) 
+    """
+    # get data for specific page number using get method
+    page_data = snail_story.get(page_number)
+
+    if(page_data):
+        # if page data exists, get text, options and hint
+        text = page_data.get('Text', [])
+        options = page_data.get('Options', [])
+        hint = page_data.get('Hint', [])
+        return text, options, hint
+    else:
+        # return none if page number is not found
+        return None, None, None
+
+
+# 6. Function to display page text
+def print_page_text(lines: list):
+    """
+    Prints each line of text one by one and pauses for a short time after each line.
 
     Args:
         lines (list): A list of strings, where each string is a line of text to display.
@@ -219,25 +246,62 @@ def display_page_text(lines):
     print() # Print an empty line for better readability
 
 
-# 6. Get user's choice 
+# 7. Get and validate user's choice 
+def get_choice(valid_choice: list) -> str: # Return type annotation added here "-> str" so Python will enforce that the return value must be a string
+    """
+    Prompts user to choose a valid option.
+    Validates choice.
+    Return input entered as a string if that input is found within valid_choice list
+
+    Args:
+        valid_choice (list): A list of strings, the possible choices to make.
+
+    Returns:
+        str:  Choice entered if valid; "Invalid choice" if input not found in the valid_choice list.
+    """
+    while True:
+        user_choice = input("Please choose a valid option: ")
+        #get valid_choice list || options depending on curr page  
+
+        if user_choice in valid_choice:
+            return user_choice
+        else:
+            print("Invalid input. ", end = "")
 
 
-# 7. Get next chapter | Redirect user to choosen story page
+# 8. Get next page | Redirect user to choosen story page
+#def get_next_page():
+
+# 9. Story flow
+def story_flow(story):
+    # 9.1. print curr page text
+    curr_page = 1
+    text, options, hint = access_story_data(snail_story, curr_page)
+    
+    print_page_text(text)
+    
+    # 9.2. display options and hint
+    if options:
+        for option_text, option_page in options:
+            print(option_text, option_page)
+    
+    if hint:
+        print(hint[0])
+        
+    # 9.3. check user input
+    # 9.4. display next page according to user choice
 
 
-# 8. Story flow
-
-
-# display hint
-# end game -- show tracker info here
-# read again
+# reset adv, read story again
 # track user's page
+# end game -- show tracker info here + option to reset adv
+
 
 # main function (call all functions)
 def main():
     welcome_msg()
     get_username()
-    query_question(username_validated, query_instr)
+    ask_question(username_validated, query_instr)
 
 main()
 

@@ -6,6 +6,9 @@ import time # Importing time module to use sleep function
 import os # Importing os module to use system function
 import sys # Importing sys module to use stdout attribute
 
+# Import data from story_file.py
+from story_file import snail_story
+
 
 # Colours for text | Source: https://pypi.org/project/colorama/  
 BLACK = Fore.BLACK
@@ -26,9 +29,9 @@ brown_dots = BROWN + "..." + Style.RESET_ALL
 blue_dots = BLUE + "..." + Style.RESET_ALL
 username_validated = ""
 query_instr = "would you like to see the instructions?"
-query_adv = "would you like to start the adventure?"
-query_reset = "would you prefer to restart this adventure?"
-
+query_adv = "are you ready to start the adventure?"
+query_reset = "do you prefer to restart this adventure?"
+lines = ["Hello world", "This is a test.", "Some text."]
 
 # Functions for typing text effect; code adapted from: https://www.101computing.net/python-typing-text-effect/
 # 1. Clear screen
@@ -83,9 +86,6 @@ def get_username():
         global username_validated
         username_validated = username.capitalize()
         print(GREEN + f"{username_validated} is a valid username!\n" + Style.RESET_ALL) 
-        #typing_print("\nPlease wait, clearing screen ...\n", GRAY)
-        #time.sleep(3)
-        #clear_screen()
    
     return username_validated
 
@@ -131,25 +131,34 @@ def display_instructions():
     Prints story instructions.
     """
     typing_print("\nLoading instructions, please wait...\n", GRAY)
-    time.sleep(3)
-    clear_screen()
+    pause_and_clear()
 
+    #ASCII generator source: https://manytools.org/hacker-tools/ascii-banner/
+    print(BROWN+ r'''
+                ════════════════ Instructions ═════════════════════ 
+    ''')
+ 
     instructions = "Snail Adventure is a text-based game where you will engage in a story-driven experience.\nYou will encounter different scenes, challenges, and offer choices.\nBy selecting a choice, such as “help”, “take action,” or “accept offer”,\nyou will move to the next corresponding chapter, advancing the story based on your decisions.\n"
     instructions_justified = (justify(instructions, 85))
     
     for i in instructions_justified:
         print("\n" + BROWN + i + Style.RESET_ALL + "\n")
 
+    print(BROWN + r'''
+                ═══════════════════════════════════════════════════  
+    ''' + Style.RESET_ALL)
+
     # add question here (ready to start your adventure?)
 
 # 4. Function for yes/no question 
-def query_instructions(username_validated, query):
+def query_question(username_validated, query):
     """
-    Receives the validated username.
-    Prompts user to see story instructions.
+    Receives the validated username and a query.
+    Prompts user to answer a question.
 
     Args:
         string: username validated.
+        string: query.
     """
     answer_yes = ("yes", "y", "ye", "yep", "ok", "okay")
     answer_no = ("no", "n", "not", "nop", "nope")
@@ -158,25 +167,42 @@ def query_instructions(username_validated, query):
         #print(f"{username_validated}, would you like to see the instructions? (yes/no)\n")
         #typing_print(f"{username_validated}, would you like to see the instructions? (yes/no)\n", WHITE) 
         typing_print(f"{username_validated}, {query} (yes/no)\n", WHITE)
-        query_instructions_answer = input().strip().lower()
+        query_question_answer = input().strip().lower()
         
         # if yes answered
-        if query_instructions_answer in answer_yes:
+        if query_question_answer in answer_yes:
             #print("yes answered")
-            display_instructions()
+            # check if the second paramenter matches a specific query; then run corresponding function based on second paramenter
+            if query == query_instr:
+                display_instructions()
+                query_question(username_validated, query_adv)
+            elif query == query_adv:
+                #print("query_adv_yes")
+                typing_print(f"Loading story, {username_validated} please wait...\n", GRAY)
+                pause_and_clear()
+                # ** story starts here **
+                display_page_text(lines)
+            elif query == query_reset:
+                print("query_reset_yes")
+            else:
+                print("Query not recognized.")
         # if no answered
-        elif query_instructions_answer in answer_no:
-            #print("no answered --> call function to start story")
-            typing_print(f"Loading story, {username_validated} please wait...\n", GRAY)
-            time.sleep(3)
-            clear_screen()
-            lines_test = ["Hello world", "This is a test.", "Some text."]
-            display_page_text(lines_test)
+        elif query_question_answer in answer_no:
+            # check if the second paramenter matches a specific query; then run corresponding function based on second paramenter
+            if query == query_instr:
+                query_question(username_validated, query_adv)
+            elif query == query_reset:
+                print("query_reset_no")
+            else:
+                print("Query not recognized.")
+            
         # else
         else:
-            print("Please enter a right answer (yes/no) \n")
+            print(RED + "Please enter a right answer (yes/no) \n" + Style.RESET_ALL)
+            query_question(username_validated, query)
     except ValueError as e:
         print("Error")
+
 
 # 5. Function to display page text
 def display_page_text(lines):
@@ -211,7 +237,7 @@ def display_page_text(lines):
 def main():
     welcome_msg()
     get_username()
-    query_instructions(username_validated, query_instr)
+    query_question(username_validated, query_instr)
 
 main()
 

@@ -144,6 +144,29 @@ The story adventure will be tracked to check how far an user has gone in the sto
 
     </details>
 
+- __Python TypeError: Unhashable Type__
+  
+    The error TypeError: unhashable type: 'list' in Python occurs when trying to use a list as a hash argument although a list is an unhashable object. For instance, using a list as a key in a Python dictionary will result in an error because dictionaries require keys to be hashable data types. 
+    
+    <details>
+    <summary>Click here to see error</summary>
+    <br>
+    
+    ![Error](https://github.com/anav-dev/snail-adventure/blob/main/docs/test/typeerror-unhashable.jpg)
+
+    </details>
+    
+    This issue was addressed by correcting the way the input function was used and ensuring that the user's input is validated against the list of choices (choices) using a while loop.
+
+    <details>
+    <summary>Click here to see updated function</summary>
+    <br>
+    
+    ![Code Fixed](https://github.com/anav-dev/snail-adventure/blob/main/docs/test/typeerror-unhashable-code.jpg)
+
+    </details>
+
+
 
 ## Deployment
 

@@ -27,10 +27,17 @@ emoji_snail = emoji.emojize(":snail:")
 emoji_whale = emoji.emojize(":whale:")
 brown_dots = BROWN + "..." + Style.RESET_ALL
 blue_dots = BLUE + "..." + Style.RESET_ALL
+
 username_validated = ""
+
+answer_yes = ("yes", "y", "ye", "yep", "ok", "okay")
+answer_no = ("no", "n", "not", "nop", "nope")
+
 query_instr = "would you like to see the instructions?"
 query_adv = "are you ready to start the adventure?"
+query_choice = "what's your next move?"
 query_reset = "do you prefer to restart this adventure?"
+query_hint = "Hint needed? (yes/no)"
 
 
 # Functions for typing text effect; code adapted from: https://www.101computing.net/python-typing-text-effect/
@@ -160,9 +167,6 @@ def ask_question(username_validated, query):
         string: username validated.
         string: query.
     """
-    answer_yes = ("yes", "y", "ye", "yep", "ok", "okay")
-    answer_no = ("no", "n", "not", "nop", "nope")
-
     try:
         #print(f"{username_validated}, would you like to see the instructions? (yes/no)\n")
         #typing_print(f"{username_validated}, would you like to see the instructions? (yes/no)\n", WHITE) 
@@ -232,22 +236,40 @@ def access_story_data(snail_story, page_number):
 
 
 # 6. Function to display page text
-def print_page_text(lines: list):
+def print_text(stringlist: list):
     """
     Prints each line of text one by one and pauses for a short time after each line.
 
     Args:
         lines (list): A list of strings, where each string is a line of text to display.
     """
-    for line in lines:     
-        print(line) # Print the line with a newline character at the end
-        time.sleep(0.1) # Pause for 0.1 seconds
-    
-    print() # Print an empty line for better readability
+    if stringlist == text: 
+        for line in stringlist:     
+            print(WHITE + line + Style.RESET_ALL) # Print the line with a newline character at the end
+            time.sleep(0.1) # Pause for 0.1 seconds
+        print() # Print an empty line for better readability
+
+    elif stringlist == options:
+        for i, (option_text, option_page) in enumerate(options): # enumerate function provides a counter to the loop
+            print(f"{i + 1}.{option_text} || Go to page: {option_page}")
+
+    elif stringlist == hint:
+        if hint:
+            user_hint_answer = input(f"{query_hint}")
+
+            if user_hint_answer in answer_yes:  
+                print(hint[0])
+            elif user_hint_answer in answer_no:
+                print("no hint needed")
+                
+            
+        
+        
+        
 
 
 # 7. Get and validate user's choice 
-def get_choice(valid_choice: list) -> str: # Return type annotation added here "-> str" so Python will enforce that the return value must be a string
+def get_choice(choices: list) -> str: # Return type annotation added here "-> str" so Python will enforce that the return value must be a string
     """
     Prompts user to choose a valid option.
     Validates choice.
@@ -259,34 +281,43 @@ def get_choice(valid_choice: list) -> str: # Return type annotation added here "
     Returns:
         str:  Choice entered if valid; "Invalid choice" if input not found in the valid_choice list.
     """
-    while True:
-        user_choice = input("Please choose a valid option: ")
-        #get valid_choice list || options depending on curr page  
+    # retrieve options text and page
+    option_one = choices[0][0]
+    option_one_page = choices[0][1]
 
-        if user_choice in valid_choice:
-            return user_choice
+    option_two = choices[1][0]
+    option_two_page = choices[1][1]
+
+    while True:
+        user_choice = input(f"{username_validated}, {query_choice}\n\n{option_one}\n{option_two}\n")  
+
+        if user_choice in choices:
+            print(GREEN + "Valid choice" + Style.RESET_ALL)
+            #return user_choice
         else:
-            print("Invalid input. ", end = "")
+            print(RED + "Invalid choice. Please choose from the provided options." + Style.RESET_ALL)     
+
 
 
 # 8. Get next page | Redirect user to choosen story page
 #def get_next_page():
 
+
+
+# global variables used on below functions
+curr_page = 1 # set current page
+text, options, hint = access_story_data(snail_story, curr_page) # retrieve data from snail_story file
+
+
 # 9. Story flow
 def story_flow(story):
     # 9.1. print curr page text
-    curr_page = 1
-    text, options, hint = access_story_data(snail_story, curr_page)
+    print_text(text)
     
-    print_page_text(text)
-    
-    # 9.2. display options and hint
-    if options:
-        for option_text, option_page in options:
-            print(option_text, option_page)
-    
-    if hint:
-        print(hint[0])
+    # 9.2. get user choice and display hint if needed
+    get_choice(options)
+    #print_text(options)
+    #print_text(hint)
         
     # 9.3. check user input
     # 9.4. display next page according to user choice

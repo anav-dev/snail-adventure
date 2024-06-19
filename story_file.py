@@ -3,9 +3,14 @@ snail_story = {
     # story start
     1: {
         'Text' : [
+            ". . . . .  ",
+            "Chapter 1",
+            ". . . . . ",
+            " ",
             "On a rock by the docks lives a sea snail",
             "who dreams of seeing the big, wide world, ",
-            "a desire her rock-bound friends don't understand.",
+            "a desire her rock-bound friends don't understand...",
+            " ",
         ],
         'Options': [
             ("Take action", 2),
@@ -18,6 +23,7 @@ snail_story = {
     # option selected: take action
     2: {
         'Text' : [
+            "Chapter 2",
             "The Snail writes a `Lift wanted around the world` message using her snail trail.",
             "One moonlit night, a kind humpback whale arrives and offers to take her along on his travels.",
         ],
@@ -32,6 +38,7 @@ snail_story = {
     # option selected: accept offer
     3: {
         'Text' : [
+            "Chapter 3",
             "Together, they embark on a journey across the oceans, past icebergs, volcanoes, sharks, and penguins.",
             "One sunny summer morning, the whale, confused by the sound of racing speedboats, ",
             "swims into a bay and gets stranded by the retreating tide.",
@@ -47,6 +54,7 @@ snail_story = {
     # option selected: help
     4: {
         'Text' : [
+            "Chapter 4",
             "The snail writes `Save The Whale!` with her trail on a school blackboard to help her friend.",
             "The teacher calls for help, and villagers keep the whale wet until the tide returns.",
             "The snail and the whale then swim away safely.",
@@ -62,6 +70,7 @@ snail_story = {
     # option selected: keep adventuring
     5: {
         'Text' : [
+            "Chapter 5",
             "One day, a fearsome sea dragon arrives at the docks threatening to harm everyone.",
         ],
         'Options': [
@@ -75,6 +84,7 @@ snail_story = {
     # option selected: fight the dragon
     6: {
         'Text' : [
+            "Chapter 6",
             "The snail trickes the dragon into believing they have a treasure in a nearby underwater cave",
             "As they venture deeper into caves, the snail using her small size, ",
             "guides the dragon through narrow passages that trap the dragon, ",
@@ -91,6 +101,7 @@ snail_story = {
     # option selected: come back home
     7: {
         'Text' : [
+            "Chapter 7",
             "They return to the snail's home at the dock, ",
             "where the other snails are amazed by their stories.",
         ],
@@ -105,6 +116,7 @@ snail_story = {
     # option selected: meet the snail major
     8: {
         'Text' : [
+            "Chapter 8",
             "After their adventure, the mayor of the docks congratulates the snail.",
             "In recognition of her heroic actions, he presents her with ",
             "the prestigious Docks Medal, symbolizing her invaluable bravery.",
@@ -120,6 +132,7 @@ snail_story = {
     # option selected: go to sleep
     9: {
         'Text' : [
+            "Chapter 9",
             "After a long adventure, the snail realizes that ...",
             " anyone, no matter how small you are, "
             "can achieve great things if they put their mind to it! ",
@@ -136,6 +149,7 @@ snail_story = {
     # options selected: do not help, run away, or end story
     10: {
         'Text' : [
+            "Chapter 10",
             "And so, this adventure came to an end!",
         ],
         'Options': [

@@ -162,7 +162,7 @@ The story adventure will be tracked to check how far an user has gone in the sto
     <summary>Click here to see updated function</summary>
     <br>
     
-    ![Code Fixed](https://github.com/anav-dev/snail-adventure/blob/main/docs/test/typeerror-unhashable-code.jpg)
+    ![Code Fixed](https://github.com/anav-dev/snail-adventure/blob/main/docs/test/typeerror-unhashable-code.png)
 
     </details>
 

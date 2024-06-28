@@ -145,7 +145,7 @@ def print_instructions():
                 ════════════════ Instructions ═════════════════════ 
     ''')
  
-    instructions = "Snail Adventure is a text-based game where you will engage in a story-driven experience.\nYou will encounter different scenes, challenges, and offer choices.\nBy selecting a choice, such as “help”, “take action,” or “accept offer”,\nyou will move to the next corresponding chapter, advancing the story based on your decisions.\n"
+    instructions = "Snail Adventure is a text-based game where you will engage in a story-driven experience.\nYou will encounter different scenes, challenges, and different options.\nBy selecting an option, such as “help”, “take action,” or “accept offer”,\nyou will move to the next corresponding chapter, advancing the story based on your decisions.\n"
     instructions_justified = (justify(instructions, 85))
     
     for i in instructions_justified:
@@ -184,8 +184,8 @@ def ask_question(username_validated, query):
                 #print("query_adv_yes")
                 typing_print(f"Loading story, {username_validated} please wait...\n", GRAY)
                 pause_and_clear()
+                return
                 # ** story starts here **
-                story_flow(snail_story)
             elif query == query_reset:
                 print("query_reset_yes")
             else:
@@ -214,7 +214,7 @@ def access_story_data(snail_story, page_number):
     Accesses 'Text', 'Options', 'Hint' data for a specific page number.
 
     Args:
-        data (dict): data structure imported from story_file.py
+        snail_story (dict): data structure imported from story_file.py
         page_number (int): page number for which data needs to be accesed.
 
     Returns:
@@ -253,55 +253,72 @@ def print_text(stringlist: list):
         for i, (option_text, option_page) in enumerate(options): # enumerate function provides a counter to the loop
             print(f"{i + 1}.{option_text} || Go to page: {option_page}")
 
-    elif stringlist == hint:
-        if hint:
-            user_hint_answer = input(f"{query_hint}")
 
-            if user_hint_answer in answer_yes:  
-                print(hint[0])
-            elif user_hint_answer in answer_no:
-                print("no hint needed")
-                
-            
-        
-        
-        
-
-
-# 7. Get and validate user's choice 
-def get_choice(choices: list) -> str: # Return type annotation added here "-> str" so Python will enforce that the return value must be a string
+# 7. Function to display hint if yes answered
+def display_hint(user_choice, hint, curr_page):
     """
-    Prompts user to choose a valid option.
-    Validates choice.
-    Return input entered as a string if that input is found within valid_choice list
+    Prompts the user with a yes/no question and displays a hint if the answer is 'yes'.
 
     Args:
-        valid_choice (list): A list of strings, the possible choices to make.
+        hint (str): The hint must be displayed if the user answers 'yes'.
+    """
+    print(user_choice)
+    # while True:
+    #     user_hint_answer = input(f"{query_hint}")
+
+    #     if user_hint_answer in answer_yes:  
+    #             print(GREEN + f"Hint: {hint[0]}\n" + Style.RESET_ALL)
+    #             break
+    #     elif user_hint_answer in answer_no:
+    #             print(f"No hint will be provided\n{blue_dots}{emoji_whale}\n") 
+    #             break
+    #     else:
+    #         print(RED + "Invalid response. Please enter 'yes' or 'no'. \n")
+            
+            
+# 8. Get and validate user's option chosen
+def get_option(options, curr_page):
+    """
+    Displays two options and hint query if requested.
+    Prompts user repeatedly to choose an option until a valid option is selected.
+    Return user's option as a string.
+
+    Args:
+        options (list): A list of options that contains text and the next page number.
+        curr_page (int): Number of the current page.
 
     Returns:
-        str:  Choice entered if valid; "Invalid choice" if input not found in the valid_choice list.
+        next_page (int): The next page number corresponding with the user's option chosen.
     """
-    # retrieve options text and page
-    option_one = choices[0][0]
-    option_one_page = choices[0][1]
+    print("Options:\n")
+    options_text = []
+    options_valid_nos = [1, 2, 3]
 
-    option_two = choices[1][0]
-    option_two_page = choices[1][1]
+    # retrieve options' text
+    for i, (option_text, _) in enumerate(options, curr_page):
+        options_text.append(option_text)
+        print(f"{i}. {option_text}")
+
+    print() # add an empty line for separation
 
     while True:
-        user_choice = input(f"{username_validated}, {query_choice}\n\n{option_one}\n{option_two}\n")  
+        global user_choice # set as global as it'll be use in display_hint() and get_next_page()
+        user_choice = int(input(f"{username_validated}, {query_choice}\n")) # userchoice is type: int
+        print("Please enter option number `1` or `2`, otherwise enter `3` to exit this program.")
 
-        if user_choice in choices:
+        if user_choice in options_valid_nos:
             print(GREEN + "Valid choice" + Style.RESET_ALL)
-            #return user_choice
+            return user_choice
         else:
-            print(RED + "Invalid choice. Please choose from the provided options." + Style.RESET_ALL)     
+            print(RED + "Invalid choice. Please choose from the provided options." + Style.RESET_ALL)  
 
 
+# 9. Get next page | Redirect user to choosen story page
+def get_next_page(next_page):
+    """
+    """
 
-# 8. Get next page | Redirect user to choosen story page
-#def get_next_page():
-
+    print(next_page)
 
 
 # global variables used on below functions
@@ -309,19 +326,19 @@ curr_page = 1 # set current page
 text, options, hint = access_story_data(snail_story, curr_page) # retrieve data from snail_story file
 
 
-# 9. Story flow
+# 10. Story flow
 def story_flow(story):
-    # 9.1. print curr page text
+    # 10.1 print curr page text
     print_text(text)
     
-    # 9.2. get user choice and display hint if needed
-    get_choice(options)
-    #print_text(options)
-    #print_text(hint)
-        
-    # 9.3. check user input
-    # 9.4. display next page according to user choice
+    # 10.2. get user option
+    get_option(options, curr_page)
 
+    # 10.3 display hint
+    display_hint(user_choice, hint, curr_page)
+
+    # 10.4 display next page according to user option chosen
+    #get_next_page()
 
 # reset adv, read story again
 # track user's page
@@ -330,10 +347,10 @@ def story_flow(story):
 
 # main function (call all functions)
 def main():
-    welcome_msg()
-    get_username()
-    ask_question(username_validated, query_instr)
+    #welcome_msg()
+    #get_username()
+    #ask_question(username_validated, query_instr)
+    story_flow(snail_story)
 
 main()
-
 
